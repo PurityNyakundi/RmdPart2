@@ -1,0 +1,7 @@
+"0","hist("
+"0","  Data2$density,"
+"0","  main = "" distribution"","
+"0","  col = ""red"","
+"0","  xlab = ""density"","
+"0","  ylab = ""count"""
+"0",")"

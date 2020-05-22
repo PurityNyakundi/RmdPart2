@@ -1,0 +1,7 @@
+"0","hist("
+"0","  Data2$fixed_acidity,"
+"0","  main = ""Fixed acidity distribution"","
+"0","  col = ""red"","
+"0","  xlab = ""fixed acidy"","
+"0","  ylab = ""count"""
+"0",")"

@@ -1,0 +1,5 @@
+"0","ggplot(Data1, aes(x = density, y =alcohol )) + "
+"0","    geom_jitter() + theme(legend.position = 'none') + "
+"0","    labs(x='density', y ='alcohol')+"
+"0","  geom_smooth(method = ""lm"")"
+"0",""

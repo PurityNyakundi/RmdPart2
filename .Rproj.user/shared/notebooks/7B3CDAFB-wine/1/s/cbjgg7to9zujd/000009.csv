@@ -1,0 +1,4 @@
+"0","ggplot(Data1, aes(x = residual_sugar, y = alcohol)) + "
+"0","    geom_jitter() + theme(legend.position = 'none') + "
+"0","    labs(x='residual_sugar', y ='alcohol')"
+"0",""

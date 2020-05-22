@@ -1,0 +1,5 @@
+"0","#par(mfrow=c(2,5))"
+"0","for (i in 1:length(Data1)) {"
+"0","        boxplot(Data1[,i], main=names(Data1[i]), type=""l"")"
+"0",""
+"0","}"

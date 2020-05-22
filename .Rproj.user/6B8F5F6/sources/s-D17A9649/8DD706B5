@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588760465239.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "8DD706B5",
+    "lastKnownWriteTime" : 8389754676516450921,
+    "last_content_update" : 1588760465239,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "B2472EEB",
+        "caption" : "winequality_red",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=winequality_red&cache_key=B2472EEB",
+        "displayedObservations" : 1599,
+        "environment" : "",
+        "expression" : "winequality_red",
+        "object" : "winequality_red",
+        "preview" : 0,
+        "totalObservations" : 1599,
+        "variables" : 12
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,6 @@
+"0","#now lets do bivariate EDA "
+"0","#options(repr.plot.width = 11, repr.plot.height = 5)"
+"0","ggplot(Data1, aes(x = chlorides, y = alcohol)) + "
+"0","    geom_jitter() + theme(legend.position = 'none') + "
+"0","    labs(x='chlorides', y ='alcohol')"
+"0",""

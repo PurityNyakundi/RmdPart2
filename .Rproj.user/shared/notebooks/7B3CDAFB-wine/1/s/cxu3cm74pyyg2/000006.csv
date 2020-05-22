@@ -1,0 +1,6 @@
+"0","Data1%>%"
+"0","  gather(-quality,key = ""var"",value = ""value"")%>%"
+"0","  ggplot(aes(x = value,y =quality ))+"
+"0","  facet_wrap(~var,scales = ""free"")+"
+"0","  geom_jitter()+"
+"0","  geom_smooth(method = ""lm"")"

@@ -1,0 +1,12 @@
+"0","library(psych)"
+"2","package ‘psych’ was built under R version 3.6.3"
+"2","
+Attaching package: ‘psych’
+
+"
+"2","The following objects are masked from ‘package:ggplot2’:
+
+    %+%, alpha
+
+"
+"0","multi.hist(Data1,density=TRUE,freq=T,bcol = ""red"",dcol=c(""black"",""black""),dlty=c(""dashed"",""dotted"",main =NULL,breaks = 21))"

@@ -1,0 +1,7 @@
+"0","hist("
+"0","  Data2$volatile_acidity,"
+"0","  main = ""volatile acidity distribution"","
+"0","  col = ""red"","
+"0","  xlab = ""volatile acidy"","
+"0","  ylab = ""count"""
+"0",")"

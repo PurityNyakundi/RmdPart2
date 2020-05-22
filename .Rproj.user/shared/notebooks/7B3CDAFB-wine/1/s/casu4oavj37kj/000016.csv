@@ -1,0 +1,4 @@
+"0","ggplot(aes(x = test$quality,y = pred1),"
+"0","       data = data.frame(actual =test$quality,pred1 =predict(model1,test)))+"
+"0","  geom_abline()+"
+"0","  geom_point()"

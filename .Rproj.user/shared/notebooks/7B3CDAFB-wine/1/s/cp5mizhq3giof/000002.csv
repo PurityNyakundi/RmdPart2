@@ -1,0 +1,3 @@
+"0","#split the training and the testing"
+"0","train<-Data1[index,]"
+"0","test <-Data1[-index,]"

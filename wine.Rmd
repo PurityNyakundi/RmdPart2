@@ -1,0 +1,354 @@
+---
+title: "WineTasting"
+author: "Purity"
+date: "06/05/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#problem statement
+A wine company has problems on knowing which quality wine do they sell.Their sales are going down.They have colleted data and gave you to make insights and tell them how to improve their sales.
+#solution
+
+```{r cars}
+#load the dataset
+Data2<- read.csv("Wine.csv")
+Data3<-read.csv("Wine.csv")
+```
+
+## load the libraries
+
+```{r pressure, echo=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(GGally)
+
+```
+
+#Understand the data
+```{r}
+#shape
+dim(Data2)
+```
+
+
+```{r}
+str(Data2)
+```
+```{r}
+#if there are missing values
+colSums(is.na(Data2))
+```
+#No missing values
+```{r}
+#check summary 
+summary(Data2)
+```
+```{r}
+#Its an all numeric variable
+boxplot(Data2)
+```
+#check for outliers
+```{r}
+boxplot(Data2[,1:12])
+```
+
+
+```{r}
+#check correlation
+cor(Data2)
+
+```
+```{r}
+colnames(Data2)<-c("fixed_acidity", "volatile_acidity","citric_acid","residual_sugar","chlorides","free_sudioxide ","total_sudioxide ","density","pH ","sulphates" ,"alcohol","quality")
+names(Data2)
+```
+```{r}
+#normalize the data
+normalize <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+}
+
+
+data_nom<-as.data.frame(lapply(Data2[1:11],normalize))
+
+
+summary(data_nom)
+
+```
+#univariate eda
+```{r}
+hist(
+  Data2$fixed_acidity,
+  main = "Fixed acidity distribution",
+  col = "red",
+  xlab = "fixed acidy",
+  ylab = "count"
+)
+```
+```{r}
+hist(
+  Data2$volatile_acidity,
+  main = "volatile acidity distribution",
+  col = "red",
+  xlab = "volatile acidy",
+  ylab = "count"
+)
+```
+
+```{r}
+hist(
+  Data2$citric_acid,
+  main = "citric distribution",
+  col = "red",
+  xlab = "citric acidy",
+  ylab = "count"
+)
+```
+
+```{r}
+hist(
+  Data2$residual_sugar,
+  main = "residual_sugar distribution",
+  col = "red",
+  xlab = "residual sugar",
+  ylab = "count"
+)
+```
+```{r}
+hist(
+  Data2$chlorides,
+  main = "chlorides distribution",
+  col = "red",
+  xlab = "chlorides",
+  ylab = "count"
+)
+```
+
+```{r}
+hist(
+  Data2$`free_sudioxide `,
+  main = "free suphur dioxide distribution",
+  col = "red",
+  xlab = "free sulphur ",
+  ylab = "count"
+)
+```
+
+```{r}
+hist(
+  Data2$`total_sudioxide `,
+  main = "total sulphur dioxide distribution",
+  col = "red",
+  xlab = "total dioxide",
+  ylab = "count"
+)
+```
+
+
+```{r}
+hist(
+  Data2$density,
+  main = " distribution",
+  col = "red",
+  xlab = "density",
+  ylab = "count"
+)
+```
+
+```{r}
+hist(
+  Data2$`pH `,
+  main = "ph distribution",
+  col = "red",
+  xlab = "PH",
+  ylab = "count"
+)
+```
+
+```{r}
+hist(
+  Data2$sulphates,
+  main = "sulphates distribution",
+  col = "red",
+  xlab = "sulphates",
+  ylab = "count"
+)
+```
+```{r}
+hist(
+  Data2$alcohol,
+  main = "alcohol distribution",
+  col = "red",
+  xlab = "alcohol",
+  ylab = "count"
+)
+```
+
+#check for outliers
+```{r}
+quality = Data3$quality
+Data1<-cbind(data_nom,quality)
+head(Data1)
+str(Data1)
+```
+```{r}
+head(Data1)
+```
+
+```{r}
+boxplot(sulphates~quality,data = Data1)
+```
+
+```{r}
+#par(mfrow=c(2,5))
+for (i in 1:length(Data1)) {
+        boxplot(Data1[,i], main=names(Data1[i]), type="l")
+
+}
+```
+#each variable has outliers
+```{r}
+#par(mfrow=c(2,5))
+for (i in 1:length(Data1)) {
+        hist(Data1[,i],xlab =names(Data1[,i]) )
+
+}
+```
+```{r}
+library(psych)
+multi.hist(Data1,density=TRUE,freq=T,bcol = "red",dcol=c("black","black"),dlty=c("dashed","dotted",main =NULL,breaks = 21))
+#multi hist is an easier way of checking distribution
+?multi.hist
+```
+#above you can easily check distribution of each varible
+```{r}
+library(outliers)
+rm.outlier(Data1$sulphates, fill = FALSE, median = FALSE, opposite = FALSE)
+```
+
+```{r}
+library(GGally)
+ggcorr(Data1)
+library(corrplot)
+#heatmap(Data1)
+corrplot::corrplot(cor(Data1))
+
+```
+
+```{r}
+Data1%>%
+  gather(-quality,key = "var",value = "value")%>%
+  ggplot(aes(x = value,y =quality ))+
+  facet_wrap(~var,scales = "free")+
+  geom_jitter()+
+  geom_smooth(method = "lm")
+```
+#from the graph above,it seem there is alot of noise in the data.
+#And most of the variable are non-linearly corelated.
+#Outliers are causing a great influence in fitting the best fit,it seems to go far so that it can accomodate all.
+```{r}
+#now lets do bivariate EDA 
+#options(repr.plot.width = 11, repr.plot.height = 5)
+ggplot(Data1, aes(x = chlorides, y = alcohol)) + 
+    geom_jitter() + theme(legend.position = 'none') + 
+    labs(x='chlorides', y ='alcohol')
+
+```
+#from our correlation ,we have seen alcohol is the one which is slightly correlated with the quality of the wine.The amount of alcohol increase increases the quality,so with chlorides it is needed so less to improve on quality of the wine.
+#the smaller the amount of chlorides the better.
+```{r}
+ggplot(Data1, aes(x = density, y =alcohol )) + 
+    geom_jitter() + theme(legend.position = 'none') + 
+    labs(x='density', y ='alcohol')+
+  geom_smooth(method = "lm")
+
+```
+#To get a greator wine quality, the density should be decreased.
+```{r}
+ggplot(Data1, aes(x = citric_acid, y = alcohol)) + 
+    geom_jitter() + theme(legend.position = 'none') + 
+    labs(x='citric_acid', y ='alcohol')+
+  geom_abline()
+
+```
+
+#For the citric acid it seems to just add noise.
+```{r}
+ggplot(Data1, aes(x = residual_sugar, y = alcohol)) + 
+    geom_jitter() + theme(legend.position = 'none') + 
+    labs(x='residual_sugar', y ='alcohol')
+
+```
+
+#residual sugar almost has same effect as the chlorides.
+#lets try to model with some few variables
+```{r}
+library(caret)
+index<-createDataPartition(Data1$quality,list = F,p = 0.8)
+
+```
+```{r}
+#split the training and the testing
+train<-Data1[index,]
+test <-Data1[-index,]
+```
+```{r}
+#check the splits 
+sample_n(train,3)
+dim.data.frame(test)
+sample_n(test,3)
+```
+#well splitted,with the train data having 80% of all
+```{r}
+#lets start with the linear regression
+#first we use some varibles, alcohol,fixed_acidity,chlorides,density
+model<-lm(quality~.,data = train)
+pred<-predict(model,test)
+summary(model)
+res = pred - test$quality
+rsme = sqrt(mean(res^2))
+cat("The rsme is",rsme,"\n")
+
+#very poor perfomance
+```
+
+#the model performs so poorly
+#lets try the random forest.
+```{r}
+library(randomForest)
+model1<-randomForest(quality~.,data= train,ntrees = 500)
+?randomForest
+pred1<-predict(model1,train)
+mean(pred1 == train$quality)
+summary(model1)
+conf<-model1$confusion
+conf
+```
+```{r}
+ggplot(aes(x = test$quality,y = pred1),
+       data = data.frame(actual =test$quality,pred1 =predict(model1,test)))+
+  geom_abline()+
+  geom_point()
+```
+
+#the model is perfoming so poorly
+```{r}
+#its time to try xgboost.To boost our algorithm to a a better perfomance.
+
+library(xgboost)
+#new_tr<-train[,1:11]
+new_ts<-test[,1:11]
+head(new_ts)
+```
+```{r}
+labelt<-train$quality
+label_t<-test$quality
+head(label_t)
+```
+Not done yet
+CONCLUSION 
+To check the amount of quality of red wine alcohol is the most important feature to consider
+

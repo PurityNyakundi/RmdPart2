@@ -1,0 +1,6 @@
+"0","#its time to try xgboost.To boost our algorithm to a a better perfomance."
+"0",""
+"0","library(xgboost)"
+"0","#new_tr<-train[,1:11]"
+"0","new_ts<-test[,1:11]"
+"0","head(new_ts)"

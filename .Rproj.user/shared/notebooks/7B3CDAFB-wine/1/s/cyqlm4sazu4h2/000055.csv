@@ -1,0 +1,3 @@
+"0","quality = Data3$quality"
+"0","Data1<-cbind(data_nom,quality)"
+"0","head(Data1)"

@@ -1,0 +1,7 @@
+"0","hist("
+"0","  Data2$chlorides,"
+"0","  main = ""chlorides distribution"","
+"0","  col = ""red"","
+"0","  xlab = ""chlorides"","
+"0","  ylab = ""count"""
+"0",")"
